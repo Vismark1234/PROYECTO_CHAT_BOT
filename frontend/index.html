@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BECATS UMSA - Asistente Virtual</title>
+    <meta name="description"
+        content="Portal de becas UMSA con asistente virtual integrado para ayudarte con tus consultas">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <!-- Iframe container for the original website -->
+    <div class="iframe-container">
+        <iframe id="becats-iframe" src="https://becats.umsa.bo/" title="BECATS UMSA Portal" allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Floating Chat Button -->
+    <button id="chat-button" class="chat-button" aria-label="Abrir chat de asistencia">
+        <svg class="chat-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H6L4 18V4H20V16Z"
+                fill="currentColor" />
+            <path d="M7 9H17V11H7V9ZM7 12H14V14H7V12Z" fill="currentColor" />
+        </svg>
+        <svg class="close-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
+                fill="currentColor" />
+        </svg>
+        <span class="notification-badge">1</span>
+    </button>
+
+    <!-- Chat Window -->
+    <div id="chat-window" class="chat-window">
+        <div class="chat-header">
+            <div class="chat-header-content">
+                <div class="avatar">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z"
+                            fill="currentColor" />
+                    </svg>
+                </div>
+                <div class="chat-info">
+                    <h3>Asistente BECATS</h3>
+                    <p class="status"><span class="status-dot"></span>En línea</p>
+                </div>
+            </div>
+            <button id="close-chat" class="close-button" aria-label="Cerrar chat">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z"
+                        fill="currentColor" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="chat-messages" id="chat-messages">
+            <div class="message bot-message">
+                <div class="message-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 5C13.66 5 15 6.34 15 8C15 9.66 13.66 11 12 11C10.34 11 9 9.66 9 8C9 6.34 10.34 5 12 5ZM12 19.2C9.5 19.2 7.29 17.92 6 15.98C6.03 13.99 10 12.9 12 12.9C13.99 12.9 17.97 13.99 18 15.98C16.71 17.92 14.5 19.2 12 19.2Z"
+                            fill="currentColor" />
+                    </svg>
+                </div>
+                <div class="message-content">
+                    <p>¡Hola! 👋 Soy tu asistente virtual de la beca de apoyo económico por rendimiento académico de la UMSA. ¿En qué puedo ayudarte hoy?</p>
+                    <div class="welcome-links">
+                        <p class="welcome-links-title">Puedes consultar sobre:</p>
+                        <div class="welcome-links-container">
+                            <a href="#" class="welcome-link" data-prompt="convocatorias">📢 Convocatorias</a>
+                            <a href="#" class="welcome-link" data-prompt="proceso de postulación">📋 Proceso de Postulación</a>
+                            <a href="#" class="welcome-link" data-prompt="requisitos para la obtención de la beca">✅ Requisitos para la Obtención de la Beca</a>
+                            <a href="#" class="welcome-link" data-prompt="documentación requerida">📄 Documentación Requerida</a>
+                            <a href="#" class="welcome-link" data-prompt="contactos">📞 Contactos</a>
+                        </div>
+                    </div>
+                    <span class="message-time">Ahora</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-input-container">
+            <div class="quick-replies" id="quick-replies">
+                <button class="quick-reply-btn">📋 Proceso de Postulación</button>
+                <button class="quick-reply-btn">✅ Requisitos</button>
+                <button class="quick-reply-btn">📄 Documentación</button>
+                <button class="quick-reply-btn">📍 Ubicación</button>
+            </div>
+            <div class="chat-input-wrapper">
+                <input type="text" id="chat-input" class="chat-input" placeholder="Escribe tu mensaje..."
+                    aria-label="Escribe tu mensaje">
+                <button id="send-button" class="send-button" aria-label="Enviar mensaje">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.01 21L23 12L2.01 3L2 10L17 12L2 14L2.01 21Z" fill="currentColor" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Modal/Lightbox -->
+    <div id="image-modal" class="image-modal">
+        <div class="image-modal-overlay"></div>
+        <div class="image-modal-content">
+            <button id="close-modal" class="image-modal-close" aria-label="Cerrar imagen">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="currentColor" />
+                </svg>
+            </button>
+            <button id="prev-image" class="image-modal-nav image-modal-prev" aria-label="Imagen anterior">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.41 7.41L14 6L8 12L14 18L15.41 16.59L10.83 12L15.41 7.41Z" fill="currentColor" />
+                </svg>
+            </button>
+            <button id="next-image" class="image-modal-nav image-modal-next" aria-label="Imagen siguiente">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 6L8.59 7.41L13.17 12L8.59 16.59L10 18L16 12L10 6Z" fill="currentColor" />
+                </svg>
+            </button>
+            <img id="modal-image" src="" alt="Imagen ampliada">
+            <div class="image-modal-counter">
+                <span id="image-counter">1 / 1</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
